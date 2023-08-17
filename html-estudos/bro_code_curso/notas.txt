@@ -1,0 +1,5 @@
+html:
+linguagem de montagem, estrutura do site.
+
+requisitos:
+web browser e um editor de texto como o vs code.

@@ -1,0 +1,160 @@
+SQL notas:
+
+
+
+
+*COMANDOS INICIAIS:*
+
+- CREATE DATABASE nomeBanco; 
+  cria banco.
+
+- USE nomeBanco;
+  define o banco como principal.
+
+- DROP DATABASE nomeBanco;
+  exclui banco.
+
+- ALTER DATABASE nomeBanco READ ONLY = 1;
+  habilita banco apenas para leitura.
+
+- ALTER DATABASE nomeBanco READ ONLY = 1;
+  desabilita banco apenas para leitura.
+
+
+
+
+
+*CRIANDO TABELAS*:
+
+Em um banco relacional, tabelas são colunas e linhas, tipo excel.
+
+- CREATE TABLE nomeTabela (
+	nomeColunasSeparadasPorVirgula tipoDado,
+  );
+  cria tabela.
+
+  Ex:
+    CREATE TABLE employees (
+	  employee_id INT,
+	  first_name VARCHAR(50),
+	  last_name VARCHAR(50),
+	  hourly_pay DECIMAL(5, 2),
+	  hire_date DATE
+    );
+
+- SELECT * FROM nomeTabela;
+  selecionar uma tabela.
+
+- RENAME TABLE nomeAntigoTabela TO nomeNovoTabela;
+  renomear tabela.
+
+- DROP TABLE nomeTabela
+  exclui tabela.
+
+
+
+
+
+*TRABALHANDO COM COLUNAS:*
+
+- ALTER TABLE nomeTabela ADD nomeColuna tipoDado
+  adiciona coluna.
+  Ex: ALTER TABLE employees ADD phone_number VARCHAR(15);
+
+- ALTER TABLE nomeTabela RENAME COLUMN nomeAntigoColuna TO nomeNovoColuna;
+  renomeia coluna.
+
+- ALTER TABLE nomeTabela MODIFY COLUMN nomeColuna tipoDado;
+  muda o tipo de dado da coluna . 
+
+- ALTER TABLE nomeTabela 
+  MODIFY nomeColuna tipoDado 
+  AFTER nomeOutraColuna; <ou> FIRST;
+  muda posição da coluna.
+
+- ALTER TABLE nomeTabela DROP COLUMN nomeColuna;
+  deleta coluna .
+
+
+
+
+*LINHAS:*
+
+- INSERT INTO nomeTabela VALUES (dadosSeparadosPorVirgula);
+  Ex: INSERT INTO employees VALUES (1, "Eugene", "Krabs", 25.50, "2023-01-02");
+  adiciona esses dados na tabela (tipo instanciar uma classe em java pelo construtor).
+
+- INSERT INTO nomeTabela (colunas que você quer preencher);
+  Ex: INSERT INTO employees (employee_id, first_name, last_name)
+      VALUES (6, "Sheldon", "Plankton");
+  adiciona apenas os dados apenas nas colunas descritas.
+
+
+
+
+*REQUISITANDO DADOS DO BANCO:*
+
+- SELECT * FROM nome tabela;
+  mostra todos os dados, select all.
+
+- SELECT nomeColunas FROM nomeTabela;
+  mostra apenas as colunas descritas.
+
+- SELECT * 
+  FROM nomeTabela
+  WHERE nomeColuna dadoEspecifico;
+  Ex: SELECT * FROM employees WHERE employee_id = 1;  
+  mostra todos os dados do empregado cadastrado com id 1.
+	
+  Você pode brincar com as colunas, dados que deseja printar e
+  até mesmo com os operadores.
+  Para referenciar células vazias usa-se IS NULL.
+
+
+
+
+*DELETANDO E ATUALIZANDO DADOS:*
+
+- UPDATE nomeTabela SET
+  nomeColuna = dadoAtualizado
+  WHERE nomeColuna = dadoEspecifico
+  Ex: UPTADE employees
+      SET hourly_pay = 10.25,
+          hire_date = "2023-01-07"
+      WHERE employee_id = 6;
+  muda o salário do Plankton para 10.25 e a data de contratação
+  para 01/07/2023.
+
+  Apagando o WHERE, atualizariamos todos os salarios para 10.25.
+
+- DELETE FROM nomeTabela WHERE nomeColuna dadoEspecifico; 
+  Ex: DELETE FROM employee
+      WHERE employee_id = 6;
+  deleta o empregado com id 6.  
+
+- SET AUTOCOMMIT = OFF;
+  desabilita salvamento automatico.
+  
+  Para criar um ponto de salvamento basta usar:
+  COMMIT (boa pratica, evita deletes e erros desastrosos).
+
+  Para voltar um COMMIT anterior basta usar:
+  ROLLBACK;
+
+
+
+
+*FUNÇÕES DATA:*
+
+- CURRENT_DATE() = data atual.
+
+- CURRENT_TIME() = hora atual.
+
+- NOW() = data e hora atual.
+
+
+
+
+*UNIQUE:*
+
+
